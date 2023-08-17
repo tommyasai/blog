@@ -1,59 +1,67 @@
-import type { ActionArgs, LoaderFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { createPost } from "~/models/post.server";
-import { requireAdminUser } from "~/session.server";
+import { getPost, updatePost, deletePost } from "~/models/post.server";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  await requireAdminUser(request);
-  return json({})
+export const loader = async ({ params }: LoaderArgs) => {
+  invariant(params.slug, "params.slug is required")
+
+  const post = await getPost(params.slug);
+  invariant(post, `Post not found: ${params.slug}`);
+
+  return json({ post });
 }
 
 export const action = async ({ request }: ActionArgs) => {
-  await requireAdminUser(request)
   const formData = await request.formData();
 
   const title = formData.get("title");
   const slug = formData.get("slug");
   const markdown = formData.get("markdown");
+  const intent = formData.get("intent")
+  console.log(slug)
+  invariant(
+    typeof slug === "string",
+    "slug must be a string",
+  );
+  if (intent == "delete") {
+    await deletePost(slug)
+    return redirect("/posts/admin")
+  }
   
   const errors = {
-    title: title ? null: "Title is required ",
+    title: title ? null : "Title is required",
     slug: slug ? null : "Slug is required",
     markdown: markdown ? null : "Markdown is required"
-  }
+  };
 
   const hasErrors = Object.values(errors).some(
     (errorMessage) => errorMessage
   );
   if (hasErrors) {
-    return json(errors)
+    return json(errors);
   }
 
   invariant(
     typeof title === "string",
     "title must be a string",
-  )
-  invariant(
-    typeof slug === "string",
-    "slug must be a string",
-  )
+  );
   invariant(
     typeof markdown === "string",
     "markdown must be a string",
-  )
+  );
 
-  await createPost({ title, slug, markdown });
-
+  await updatePost({ title, slug, markdown });
   return redirect("/posts/admin");
 };
 
 const inputClassName =
   "w-full rounded border border-gray-500 px-2 py-1 text-lg";
 
-export default function NewPost() {
+export default function EditPost() {
+  const { post }  = useLoaderData<typeof loader>();
   const errors = useActionData<typeof action>();
 
   return (
@@ -67,6 +75,7 @@ export default function NewPost() {
           <input
             type="text"
             name="title"
+            defaultValue={post.title}
             className={inputClassName}
           />
         </label>
@@ -80,6 +89,7 @@ export default function NewPost() {
           <input
             type="text"
             name="slug"
+            defaultValue={post.slug}
             className={inputClassName}
           />
         </label>
@@ -95,15 +105,24 @@ export default function NewPost() {
           id="markdown"
           rows={20}
           name="markdown"
+          defaultValue={post.markdown}
           className={`${inputClassName} font-mono`}
         />
       </p>
       <p className="text-right">
         <button
           type="submit"
-          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
+          className="rounded bg-red-500 py-2 px-4 text-white hover:bg-red-600 focus:bg-red-400 disabled:bg-red-300 m-2"
+          name="intent"
+          value="delete"
         >
-          Create Post
+          Delete Post
+        </button>
+        <button
+          type="submit"
+          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300 m-2"
+        >
+          Update Post
         </button>
       </p>
     </Form>
