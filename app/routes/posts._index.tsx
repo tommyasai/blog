@@ -1,29 +1,36 @@
-import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { getPostListings } from "~/models/post.server";
+import { useOptionalAdminUser } from "~/utils";
 
-import { getPosts } from "~/models/post.server";
-
-
-
-export const loader = async () => {
-  return json({ posts: await getPosts() });
+type LoaderData = {
+  posts: Awaited<ReturnType<typeof getPostListings>>;
 };
 
-export default function Posts() {
-  const { posts } = useLoaderData<typeof loader>();
-  console.log(posts)
+export const loader: LoaderFunction = async () => {
+  const posts = await getPostListings();
+  return json<LoaderData>({ posts });
+};
+
+export default function PostsRoute() {
+  const { posts } = useLoaderData() as LoaderData;
+  const adminUser = useOptionalAdminUser();
+
   return (
     <main>
       <h1>Posts</h1>
-
-      <Link to="admin" className="text-red-600 underline">
-      Admin
-      </Link>
+      {adminUser ? (
+        <Link to="admin" className="text-red-600 underline">
+          Admin
+        </Link>
+      ) : null}
       <ul>
         {posts.map((post) => (
           <li key={post.slug}>
             <Link
               to={post.slug}
+              prefetch="intent"
               className="text-blue-600 underline"
             >
               {post.title}
@@ -32,6 +39,5 @@ export default function Posts() {
         ))}
       </ul>
     </main>
-
   );
 }
