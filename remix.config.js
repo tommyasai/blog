@@ -25,7 +25,6 @@ module.exports = {
     /^vfile.*/,
     /^is-plain-ob.*/,
     /^trim-lines.*/,
-    
   ],
   tailwind: true,
   future: {

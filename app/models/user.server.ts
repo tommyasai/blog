@@ -34,7 +34,7 @@ export async function deleteUserByEmail(email: User["email"]) {
 
 export async function verifyLogin(
   email: User["email"],
-  password: Password["hash"]
+  password: Password["hash"],
 ) {
   const userWithPassword = await prisma.user.findUnique({
     where: { email },
@@ -46,11 +46,11 @@ export async function verifyLogin(
   if (!userWithPassword || !userWithPassword.password) {
     return null;
   }
-  console.log(userWithPassword)
+  console.log(userWithPassword);
 
   const isValid = await bcrypt.compare(
     password,
-    userWithPassword.password.hash
+    userWithPassword.password.hash,
   );
 
   if (!isValid) {

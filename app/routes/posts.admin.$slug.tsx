@@ -3,26 +3,27 @@ import { Response, json, redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { Post, createPost, getPost, updatePost } from "~/models/post.server";
+import type { Post } from "~/models/post.server"
+import { createPost, getPost, updatePost } from "~/models/post.server";
 import { requireAdminUser } from "~/session.server";
 
-type LoaderData = { post?: Post }
+type LoaderData = { post?: Post };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   await requireAdminUser(request);
-  invariant(params.slug, "params.slug is required")
-  if (params.slug === 'new') {
-    return json<LoaderData>({})
+  invariant(params.slug, "params.slug is required");
+  if (params.slug === "new") {
+    return json<LoaderData>({});
   }
   const post = await getPost(params.slug);
   if (!post) {
-    throw new Response('Not Found', {status: 404})
+    throw new Response("Not Found", { status: 404 });
   }
-  return json<LoaderData>({post})
-}
+  return json<LoaderData>({ post });
+};
 
 export const action = async ({ request, params }: ActionArgs) => {
-  await requireAdminUser(request)
+  await requireAdminUser(request);
   const formData = await request.formData();
 
   const title = formData.get("title");
@@ -30,38 +31,24 @@ export const action = async ({ request, params }: ActionArgs) => {
   const markdown = formData.get("markdown");
 
   const errors = {
-    title: title ? null: "Title is required ",
+    title: title ? null : "Title is required ",
     slug: slug ? null : "Slug is required",
-    markdown: markdown ? null : "Markdown is required"
-  }
+    markdown: markdown ? null : "Markdown is required",
+  };
 
-  const hasErrors = Object.values(errors).some(
-    (errorMessage) => errorMessage
-  );
+  const hasErrors = Object.values(errors).some((errorMessage) => errorMessage);
   if (hasErrors) {
-    return json(errors)
+    return json(errors);
   }
 
-  invariant(
-    typeof title === "string",
-    "title must be a string",
-  )
-  invariant(
-    typeof slug === "string",
-    "slug must be a string",
-  )
-  invariant(
-    typeof markdown === "string",
-    "markdown must be a string",
-  )
-  if (params.slug === 'new') {
+  invariant(typeof title === "string", "title must be a string");
+  invariant(typeof slug === "string", "slug must be a string");
+  invariant(typeof markdown === "string", "markdown must be a string");
+  if (params.slug === "new") {
     await createPost({ title, slug, markdown });
   } else {
-    invariant(
-      params.slug,
-      "params.slug must not be null",
-    )
-    await updatePost(params.slug, { title, slug, markdown })
+    invariant(params.slug, "params.slug must not be null");
+    await updatePost(params.slug, { title, slug, markdown });
   }
 
   return redirect("/posts/admin");
@@ -73,16 +60,16 @@ const inputClassName =
 export default function NewPost() {
   const data = useLoaderData() as LoaderData;
   const errors = useActionData<typeof action>();
-  const isNewPost = !data.post
+  const isNewPost = !data.post;
 
   return (
-    <Form method="post" key={data.post?.slug ?? 'new'}>
+    <Form method="post" key={data.post?.slug ?? "new"}>
       <p>
         <label>
           Post Title:{" "}
           {errors?.title ? (
-             <em className="text-red-600">{errors.title}</em>
-          ): null}
+            <em className="text-red-600">{errors.title}</em>
+          ) : null}
           <input
             type="text"
             name="title"
@@ -96,7 +83,7 @@ export default function NewPost() {
           Post Slug:{" "}
           {errors?.slug ? (
             <em className="text-red-600">{errors.slug}</em>
-          ): null}
+          ) : null}
           <input
             type="text"
             name="slug"
@@ -106,10 +93,11 @@ export default function NewPost() {
         </label>
       </p>
       <p>
-        <label htmlFor="markdown">Markdown: 
-        {errors?.markdown ? (
-          <em className="text-red-600">{errors.markdown}</em>
-        ): null}
+        <label htmlFor="markdown">
+          Markdown:
+          {errors?.markdown ? (
+            <em className="text-red-600">{errors.markdown}</em>
+          ) : null}
         </label>
         <br />
         <textarea

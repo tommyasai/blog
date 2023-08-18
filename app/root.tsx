@@ -21,31 +21,30 @@ export const links: LinksFunction = () => [
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
   ENV: ReturnType<typeof getEnv>;
-}
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
   return json<LoaderData>({
     user: await getUser(request),
-    ENV: getEnv()
-  })
-}
+    ENV: getEnv(),
+  });
+};
 
 export default function App() {
-  const data = useLoaderData()
+  const data = useLoaderData();
   return (
     <html lang="en">
       <head>
-
         <Links />
       </head>
       <body>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <script 
+        <script
           dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(data.ENV)}`
-        }}
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
         />
         <LiveReload />
       </body>
