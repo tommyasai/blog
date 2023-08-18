@@ -15,8 +15,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return json<LoaderData>({})
   }
   const post = await getPost(params.slug);
-
-  invariant(post, `Post not found: ${params.slug}`);
+  if (!post) {
+    throw new Response('Not Found', {status: 404})
+  }
   return json<LoaderData>({post})
 }
 
@@ -130,4 +131,3 @@ export default function NewPost() {
     </Form>
   );
 }
-
