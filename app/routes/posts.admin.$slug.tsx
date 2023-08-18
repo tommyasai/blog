@@ -1,21 +1,23 @@
 import type { ActionArgs, LoaderFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { Response, json, redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { createPost, getPost, updatePost } from "~/models/post.server";
+import { Post, createPost, getPost, updatePost } from "~/models/post.server";
 import { requireAdminUser } from "~/session.server";
+
+type LoaderData = { post?: Post }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   await requireAdminUser(request);
   invariant(params.slug, "params.slug is required")
   if (params.slug === 'new') {
-    return json({})
+    return json<LoaderData>({})
   }
-
   const post = await getPost(params.slug);
+
   invariant(post, `Post not found: ${params.slug}`);
-  return json({post})
+  return json<LoaderData>({post})
 }
 
 export const action = async ({ request, params }: ActionArgs) => {
@@ -26,7 +28,6 @@ export const action = async ({ request, params }: ActionArgs) => {
   const slug = formData.get("slug");
   const markdown = formData.get("markdown");
 
-  
   const errors = {
     title: title ? null: "Title is required ",
     slug: slug ? null : "Slug is required",
@@ -69,7 +70,7 @@ const inputClassName =
   "w-full rounded border border-gray-500 px-2 py-1 text-lg";
 
 export default function NewPost() {
-  const data = useLoaderData();
+  const data = useLoaderData() as LoaderData;
   const errors = useActionData<typeof action>();
   const isNewPost = !data.post
 
@@ -129,3 +130,4 @@ export default function NewPost() {
     </Form>
   );
 }
+
