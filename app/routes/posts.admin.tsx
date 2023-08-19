@@ -3,10 +3,13 @@ import type { LoaderFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 
 import { getPosts } from "~/models/post.server";
-import type { Post } from "~/models/post.server";
+import type { getPostListings } from "~/models/post.server";
 import { requireAdminUser } from "~/session.server";
 
-type LoaderData = [{ post: Post }];
+type LoaderData = {
+  posts: Awaited<ReturnType<typeof getPostListings>>;
+};
+
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminUser(request);
@@ -14,7 +17,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function PostAdmin() {
-  const { posts } = useLoaderData<typeof loader>();
+  const { posts } = useLoaderData() as LoaderData
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">Blog Admin</h1>
