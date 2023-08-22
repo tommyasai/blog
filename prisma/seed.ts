@@ -1,9 +1,10 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
+import invariant from "tiny-invariant";
 
 const prisma = new PrismaClient();
 
 async function seed() {
-
   const posts = [
     {
       slug: "my-second-post",
@@ -40,7 +41,7 @@ async function seed() {
       `.trim(),
     },
   ];
-  
+
   for (const post of posts) {
     await prisma.post.upsert({
       where: { slug: post.slug },
@@ -48,12 +49,28 @@ async function seed() {
       create: post,
     });
   }
-  
+
+  const password = process.env.PASSWORD;
+  const email = process.env.EMAIL;
+
+  invariant(password, "Password is not set to ENV");
+  invariant(email, "Email is not set to ENV");
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  return prisma.user.create({
+    data: {
+      email,
+      password: {
+        create: {
+          hash: hashedPassword,
+        },
+      },
+    },
+  });
 
   console.log(`Database has been seeded. 🌱`);
 }
-
-
 
 seed()
   .catch((e) => {

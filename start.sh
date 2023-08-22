@@ -7,4 +7,8 @@
 
 set -ex
 npx prisma migrate deploy
+
+export EMAIL=shallow.well11@gmail.com
+export PASSWORD=cMAl4e3W60NmbTE
+npx prisma db seed 
 npm run start
