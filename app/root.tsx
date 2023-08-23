@@ -9,7 +9,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import stylesheet from "~/tailwind.css";
+import stylesheet from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
 

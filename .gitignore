@@ -5,4 +5,8 @@ node_modules
 /public/build
 /seeds
 .env
-**/*.db
+
+/prisma/data.db
+/prisma/data.db-journal
+
+/app/styles/tailwind.css
