@@ -2,10 +2,14 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build && npm run seeds:build",
-    "seeds:build": "tsc -p tsconfig.seed.json",
+    "build": "run-s build:*",
+    "build:css": "npm run generate:css -- --minify",
+    "build:remix": "remix build",
+    "build:seed": "tsc -p tsconfig.seed.json",
     "seed": "node seeds/seed.js",
-    "dev": "remix dev",
+    "dev": "run-p dev:*",
+    "dev:css": "npm run generate:css -- --watch",
+    "dev:remix": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
     "format": "prettier --write .",
@@ -44,12 +48,13 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
     "prisma": "^5.1.1",
     "tailwindcss": "^3.3.3",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "4.8.4"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=14.0.0"
