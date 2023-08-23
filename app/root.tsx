@@ -9,14 +9,13 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import stylesheet from "./styles/tailwind.css";
+import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+};
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
