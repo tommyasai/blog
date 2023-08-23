@@ -19,7 +19,7 @@ chmod 0600 /swapfile
 mkswap /swapfile
 echo 10 > /proc/sys/vm/swappiness
 swapon /swapfile
-npx prisma db seed
+npm run seed
 swapoff /swapfile
 rm /swapfile
 

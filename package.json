@@ -4,6 +4,7 @@
   "scripts": {
     "build": "remix build && npm run seeds:build",
     "seeds:build": "tsc -p tsconfig.seed.json",
+    "seeds": "node seeds/seed.js",
     "dev": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
