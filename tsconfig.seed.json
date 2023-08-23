@@ -11,5 +11,5 @@
     "resolveJsonModule": true,
     "outDir": "seeds"
   },
-  "include": ["prisma/**/*"],
+  "include": ["prisma/**/*"]
 }

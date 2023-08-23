@@ -10,14 +10,13 @@ type LoaderData = {
   posts: Awaited<ReturnType<typeof getPostListings>>;
 };
 
-
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminUser(request);
   return json<LoaderData>({ posts: await getPosts() });
 };
 
 export default function PostAdmin() {
-  const { posts } = useLoaderData() as LoaderData
+  const { posts } = useLoaderData() as LoaderData;
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">Blog Admin</h1>

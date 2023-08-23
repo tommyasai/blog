@@ -3,7 +3,7 @@ import { Response, json, redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import type { Post } from "~/models/post.server"
+import type { Post } from "~/models/post.server";
 import { createPost, getPost, updatePost } from "~/models/post.server";
 import { requireAdminUser } from "~/session.server";
 
