@@ -20,7 +20,8 @@
   "eslintIgnore": [
     "/node_modules",
     "/build",
-    "/public/build"
+    "/public/build",
+    "/seeds/seed.js"
   ],
   "dependencies": {
     "@prisma/client": "^5.1.1",
