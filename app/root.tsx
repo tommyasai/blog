@@ -14,6 +14,7 @@ import { getEnv } from "./env.server";
 import { useEffect } from "react";
 import { isDarkMode } from "./utils/darkMode";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -56,6 +57,7 @@ export default function App() {
 >
         <Header />
         <Outlet />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
         <script
