@@ -4,7 +4,7 @@ import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import type { Post } from "~/models/post.server";
-import { createPost, getPost, updatePost } from "~/models/post.server";
+import { createPost, deletePost, getPost, updatePost } from "~/models/post.server";
 import { requireAdminUser } from "~/session.server";
 
 type LoaderData = { post?: Post };
@@ -29,6 +29,7 @@ export const action = async ({ request, params }: ActionArgs) => {
   const title = formData.get("title");
   const slug = formData.get("slug");
   const markdown = formData.get("markdown");
+  const intent = formData.get("intent")
 
   const errors = {
     title: title ? null : "Title is required ",
@@ -44,13 +45,17 @@ export const action = async ({ request, params }: ActionArgs) => {
   invariant(typeof title === "string", "title must be a string");
   invariant(typeof slug === "string", "slug must be a string");
   invariant(typeof markdown === "string", "markdown must be a string");
-  if (params.slug === "new") {
+  if (intent == "create") {
     await createPost({ title, slug, markdown });
-  } else {
-    invariant(params.slug, "params.slug must not be null");
+  }
+  invariant(params.slug, "params.slug must not be null");
+  if (intent == "delete") {
+    await deletePost(params.slug)
+    return redirect("/posts/admin")
+  }
+  if (intent == "update") {
     await updatePost(params.slug, { title, slug, markdown });
   }
-
   return redirect("/posts/admin");
 };
 
@@ -109,12 +114,35 @@ export default function NewPost() {
         />
       </p>
       <p className="text-right">
+        {!isNewPost ? (
+          <div>
+            <button
+              type="submit"
+              className="rounded bg-red-500 py-2 px-4 text-white hover:bg-red-600 focus:bg-red-400 disabled:bg-red-300 m-2"
+              name="intent"
+              value="delete"
+            >
+              Delete Post
+            </button>
+            <button
+            type="submit"
+            className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
+            name="intent"
+            value="update"
+            >
+              Update Posts
+            </button>
+          </div>
+        ) :
         <button
           type="submit"
           className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
+          name="intent"
+          value="create"
         >
-          {isNewPost ? "Create Post" : "Update Post"}s
+          Create Posts
         </button>
+        }
       </p>
     </Form>
   );
