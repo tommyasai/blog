@@ -11,6 +11,9 @@ import {
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
+import { useEffect } from "react";
+import { isDarkMode } from "./utils/darkMode";
+import { Header } from "./components/Header";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -30,12 +33,28 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   const data = useLoaderData();
+
+  useEffect(() => {
+    if (isDarkMode()) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const flexClasses = "flex flex-col items-center";
+  const spacingClasses =
+    "px-4 md:px-0 md:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto h-[100vh]";
+  const proseClasses = "prose lg:prose-xl dark:prose-invert";
+
   return (
     <html lang="en">
       <head>
         <Links />
       </head>
-      <body>
+      <body className={`dark:bg-slate-900 overflow-y-scroll ${proseClasses} ${flexClasses} ${spacingClasses}`}
+>
+        <Header />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

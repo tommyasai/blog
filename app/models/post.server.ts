@@ -7,6 +7,7 @@ export async function getPostListings() {
     select: {
       slug: true,
       title: true,
+      createdAt: true,
     },
   });
 }
