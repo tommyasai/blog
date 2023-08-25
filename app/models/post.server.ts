@@ -1,23 +1,27 @@
 import type { Post } from "@prisma/client";
 import { prisma } from "~/db.server";
+import { formatTimestampsInObject } from "~/utils/date";
 
 export type { Post };
 export async function getPostListings() {
-  return prisma.post.findMany({
+  const posts = await prisma.post.findMany({
     select: {
       slug: true,
       title: true,
       createdAt: true,
     },
   });
+  return posts.map(post => formatTimestampsInObject(post, ['createdAt']));
 }
 
 export async function getPosts() {
-  return prisma.post.findMany();
+  const posts = await prisma.post.findMany()
+  return posts.map(post => formatTimestampsInObject(post, ['createdAt', 'updatedAt']));
 }
 
 export async function getPost(slug: string) {
-  return prisma.post.findUnique({ where: { slug } });
+  const post = await prisma.post.findUnique({ where: { slug } });
+  return formatTimestampsInObject(post, ['createdAt', 'updatedAt']);
 }
 
 export async function createPost(
@@ -35,3 +39,4 @@ export async function updatePost(
 export async function deletePost(slug: string) {
   return prisma.post.delete({ where: { slug: slug } });
 }
+
