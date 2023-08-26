@@ -21,8 +21,12 @@ export default function PostSlug() {
 
   return (
     <main className="mx-auto max-w-4xl">
-      <h1 className="my-6 border-b-2 text-center text-3xl">{post.title}</h1>
-      <article className="prose lg:prose-xl">
+      <h1 className="m-0 border-b-2 text-center text-3xl">{post.title}</h1>
+      <div className="text-right">
+        Published: {post.createdAt} <br />
+        Updated: {post.updatedAt}
+      </div>
+      <article className="prose sm:prose-xl md:prose-xl lg:prose-xl dark:prose-invert">
         <ReactMarkdown>{post.markdown}</ReactMarkdown>
       </article>
     </main>
