@@ -12,7 +12,7 @@ export const Card = ({ title, slug, createdAt }: Props) => {
       <span className="text-2xl font-bold text-gray-800 dark:text-gray-200">
         {title}
       </span>
-      <p className="text-lg text-gray-600 dark:text-gray-400">"TODO: Here is summary"</p>
+      <p className="text-lg text-gray-600 dark:text-gray-400">"TODO: Here is a summary"</p>
       <InternalLink to={`/posts/${slug}`}>
         <span className="font-medium text-black dark:text-white">
           Read more

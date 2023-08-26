@@ -19,7 +19,7 @@ export const Header = () => {
         to="/"
       >
         {siteLogo ? (
-          <img className="rounded-full sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg" alt="Website logo" src={siteLogo} loading="lazy"/>
+          <img className="rounded-full sm:max-w-xs md:max-w-sm" alt="Website logo" src={siteLogo} loading="lazy"/>
         ) : ( 
           <span>{siteMetadata.domain}</span>
         )}
