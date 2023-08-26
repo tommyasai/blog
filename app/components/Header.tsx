@@ -13,19 +13,19 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="flex justify-between items-center max-w-full w-full py-8 gap-x-12 md:gap-x-0">
+    <header className="flex justify-between items-center max-w-full w-full py-8 gap-x-12">
       <Link
         className="home text-3xl font-medium no-underline flex-1 m-0 not-prose md:my-4"
         to="/"
       >
         {siteLogo ? (
-          <img className="rounded-sm max-w-xs" alt="Website logo" src={siteLogo} loading="lazy"/>
-        ) : (
+          <img className="rounded-full sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg" alt="Website logo" src={siteLogo} loading="lazy"/>
+        ) : ( 
           <span>{siteMetadata.domain}</span>
         )}
       </Link>
 
-      <div className="sm:flex items-center gap-4 hidden flex-1">
+      <div className="sm:flex items-center hidden flex-1">
         <h1>Tommyasai</h1>
 
       </div>
