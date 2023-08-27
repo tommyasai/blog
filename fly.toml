@@ -6,6 +6,7 @@ primary_region =  "nrt"
 
 [env]
 ADMIN_EMAIL = "shallow.well11@gmail.com"
+GA_TRACKING_ID = "G-JVFC90MZ4B"
 
 [experimental]
 allowed_public_ports = [ ]

@@ -6,8 +6,9 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useLocation,
 } from "@remix-run/react";
-
+import * as gtag from "~/utils/gtags.client";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
@@ -33,7 +34,15 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function App() {
+  const location = useLocation();
   const data = useLoaderData();
+  const gaTrackingId = data.ENV.GA_TRACKING_ID;
+
+  useEffect(() => {
+    if (gaTrackingId?.length) {
+      gtag.pageview(location.pathname, gaTrackingId);
+    }
+  }, [location, gaTrackingId]);
 
   useEffect(() => {
     if (isDarkMode()) {
@@ -54,8 +63,9 @@ export default function App() {
       <head>
         <Links />
       </head>
-      <body className={`dark:bg-slate-900 overflow-y-scroll ${proseClasses} ${flexClasses} ${spacingClasses}`}
->
+      <body
+        className={`dark:bg-slate-900 overflow-y-scroll ${proseClasses} ${flexClasses} ${spacingClasses}`}
+      >
         <Header />
         <Outlet />
         <Footer />
@@ -66,6 +76,26 @@ export default function App() {
             __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
           }}
         />
+        {process.env.NODE_ENV === "development" || !gaTrackingId ? null : (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${gaTrackingId}', {
+                page_path: window.location.pathname,
+              });
+            `,
+              }}
+            />
+          </>
+        )}
         <LiveReload />
       </body>
     </html>
