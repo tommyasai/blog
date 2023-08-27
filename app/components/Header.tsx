@@ -19,15 +19,19 @@ export const Header = () => {
         to="/"
       >
         {siteLogo ? (
-          <img className="rounded-full sm:max-w-xs md:max-w-sm" alt="Website logo" src={siteLogo} loading="lazy"/>
-        ) : ( 
+          <img
+            className="rounded-full sm:max-w-xs md:max-w-sm"
+            alt="Website logo"
+            src={siteLogo}
+            loading="lazy"
+          />
+        ) : (
           <span>{siteMetadata.domain}</span>
         )}
       </Link>
 
       <div className="sm:flex items-center hidden flex-1">
         <h1>Tommyasai</h1>
-
       </div>
     </header>
   );

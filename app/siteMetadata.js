@@ -1,7 +1,6 @@
 export const siteMetadata = {
   title: "tommyasai",
-  description:
-    "Hi, I am tommyasai",
+  description: "Hi, I am tommyasai",
   domain: "tommyasai.fly.dev",
   url: "https://simple-remix-blog.vercel.app",
   image: "https://www.jmalvarez.dev/images/banner.png",

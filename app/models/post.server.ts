@@ -11,17 +11,19 @@ export async function getPostListings() {
       createdAt: true,
     },
   });
-  return posts.map(post => formatTimestampsInObject(post, ['createdAt']));
+  return posts.map((post) => formatTimestampsInObject(post, ["createdAt"]));
 }
 
 export async function getPosts() {
-  const posts = await prisma.post.findMany()
-  return posts.map(post => formatTimestampsInObject(post, ['createdAt', 'updatedAt']));
+  const posts = await prisma.post.findMany();
+  return posts.map((post) =>
+    formatTimestampsInObject(post, ["createdAt", "updatedAt"]),
+  );
 }
 
 export async function getPost(slug: string) {
   const post = await prisma.post.findUnique({ where: { slug } });
-  return formatTimestampsInObject(post, ['createdAt', 'updatedAt']);
+  return formatTimestampsInObject(post, ["createdAt", "updatedAt"]);
 }
 
 export async function createPost(
@@ -39,4 +41,3 @@ export async function updatePost(
 export async function deletePost(slug: string) {
   return prisma.post.delete({ where: { slug: slug } });
 }
-

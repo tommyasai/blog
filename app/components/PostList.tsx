@@ -5,9 +5,7 @@ interface Props {
   posts: Pick<Post, "createdAt" | "slug" | "title">[];
 }
 
-export const PostsList = ({
-  posts,
-}: Props) => {
+export const PostsList = ({ posts }: Props) => {
   return (
     <div className="prose-h3:mb-0 lg:prose-h3:mb-0 prose-p:my-2 lg:prose-p:my-2">
       {posts.length >= 1 ? (
