@@ -13,9 +13,12 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="flex justify-between items-center max-w-full w-full py-8 gap-x-12">
+    <header className="flex flex-col sm:flex-row justify-between items-center max-w-full w-full md:py-8 gap-x-6">
+      <div className="sm:flex items-center sm:order-2 flex-1 md:hidden">
+        <h1 className="m-0">Tommyasai</h1>
+      </div>
       <Link
-        className="home text-3xl font-medium no-underline flex-1 m-0 not-prose md:my-4"
+        className="home text-3xl font-medium no-underline flex-1 m-4 not-prose md:my-4"
         to="/"
       >
         {siteLogo ? (
