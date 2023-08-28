@@ -12,9 +12,11 @@
     "dev:remix": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
+    "pre-commit": "npm run lint && npm run format",
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "generate:css": "tailwindcss -o ./app/styles/tailwind.css"
+    "generate:css": "tailwindcss -o ./app/styles/tailwind.css",
+    "prepare": "husky install"
   },
   "prettier": {},
   "eslintIgnore": [
@@ -49,6 +51,7 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
