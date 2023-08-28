@@ -61,7 +61,7 @@ export const action = async ({ request, params }: ActionArgs) => {
   if (intent == "update") {
     await updatePost(params.slug, { title, slug, markdown });
   }
-  return redirect("/posts/admin");
+  return redirect(`/posts/${slug}`);
 };
 
 const inputClassName =
