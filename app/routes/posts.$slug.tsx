@@ -20,9 +20,9 @@ export default function PostSlug() {
   const { post } = useLoaderData<typeof loader>();
 
   return (
-    <main className="mx-auto max-w-4xl">
+    <main className="mx-auto max-w-full">
       <h1 className="m-0 border-b-2 text-center text-2xl">{post.title}</h1>
-      <div className="text-right">
+      <div className="text-right mb-4">
         Published: {post.createdAt} <br />
         Updated: {post.updatedAt}
       </div>
