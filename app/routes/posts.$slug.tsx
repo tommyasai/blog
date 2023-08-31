@@ -1,9 +1,10 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getPost } from "~/models/post.server";
 import ReactMarkdown from "react-markdown";
+import { siteMetadata } from "~/siteMetadata";
 
 export const loader = async ({ params }: LoaderArgs) => {
   invariant(params.slug, "params.slug is required");
@@ -14,6 +15,23 @@ export const loader = async ({ params }: LoaderArgs) => {
   }
 
   return json({ post });
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  const { title, image } = data.post;
+  const summary = "Temp summary";
+  const postImage = `${siteMetadata.url}${image}`;
+
+  return [
+    { title: title },
+    { name: "description", content: summary },
+    { property: "og:title", content: title },
+    { property: "og:description", content: summary },
+    { property: "og:image", content: postImage },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: summary },
+    { name: "twitter:image", content: postImage },
+  ];
 };
 
 export default function PostSlug() {

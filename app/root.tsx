@@ -1,7 +1,13 @@
-import { json, type LinksFunction, type LoaderFunction } from "@remix-run/node";
+import {
+  json,
+  type MetaFunction,
+  type LinksFunction,
+  type LoaderFunction,
+} from "@remix-run/node";
 import {
   Links,
   LiveReload,
+  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -16,6 +22,7 @@ import { useEffect } from "react";
 import { isDarkMode } from "./utils/darkMode";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { siteMetadata } from "./siteMetadata";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -31,6 +38,27 @@ export const loader: LoaderFunction = async ({ request }) => {
     user: await getUser(request),
     ENV: getEnv(),
   });
+};
+
+export const meta: MetaFunction = ({ location }) => {
+  return [
+    { charSet: "utf-8" },
+    { title: siteMetadata.title },
+    { name: "description", content: siteMetadata.description },
+    { name: "viewport", content: "width=device-width,initial-scale=1" },
+    { name: "robots", content: "index, follow" },
+    { property: "og:url", content: `${siteMetadata.url}${location.pathname}` },
+    { property: "og:type", content: "website" },
+    { property: "og:site_name", content: siteMetadata.title },
+    { property: "og:title", content: siteMetadata.title },
+    { property: "og:description", content: siteMetadata.description },
+    { property: "og:image", content: siteMetadata.image },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:site", content: `@${siteMetadata.twitter}` },
+    { name: "twitter:title", content: siteMetadata.title },
+    { name: "twitter:description", content: siteMetadata.description },
+    { name: "twitter:image", content: siteMetadata.image },
+  ];
 };
 
 export default function App() {
@@ -59,8 +87,8 @@ export default function App() {
 
   return (
     <html lang="en">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <head>
+        <Meta />
         <Links />
       </head>
       <body
