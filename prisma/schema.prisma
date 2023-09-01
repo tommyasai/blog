@@ -27,6 +27,7 @@ model Password {
 model Post {
   slug     String @id
   title    String
+  summary  String @default("No summary provided")
   markdown String
 
   createdAt DateTime @default(now())

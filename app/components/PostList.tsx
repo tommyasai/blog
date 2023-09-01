@@ -2,7 +2,7 @@ import type { Post } from "~/models/post.server";
 import { Card } from "./Card";
 
 interface Props {
-  posts: Pick<Post, "createdAt" | "slug" | "title">[];
+  posts: Pick<Post, "createdAt" | "slug" | "summary" | "title">[];
 }
 
 export const PostsList = ({ posts }: Props) => {

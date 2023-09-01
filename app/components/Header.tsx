@@ -14,7 +14,7 @@ export const Header = () => {
 
   return (
     <header className="flex flex-col sm:flex-row justify-between items-center max-w-full w-full md:py-8 gap-x-6">
-      <div className="sm:flex items-center sm:order-2 flex-1 md:hidden">
+      <div className="flex items-center sm:order-2 flex-1 sm:hidden">
         <h1 className="m-0">Tommyasai</h1>
       </div>
       <Link

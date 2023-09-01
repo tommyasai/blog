@@ -33,12 +33,14 @@ export const action = async ({ request, params }: ActionArgs) => {
 
   const title = formData.get("title");
   const slug = formData.get("slug");
+  const summary = formData.get("summary");
   const markdown = formData.get("markdown");
   const intent = formData.get("intent");
 
   const errors = {
     title: title ? null : "Title is required ",
     slug: slug ? null : "Slug is required",
+    summary: summary ? null : "Summary is required",
     markdown: markdown ? null : "Markdown is required",
   };
 
@@ -49,9 +51,11 @@ export const action = async ({ request, params }: ActionArgs) => {
 
   invariant(typeof title === "string", "title must be a string");
   invariant(typeof slug === "string", "slug must be a string");
+  invariant(typeof summary === "string", "summary must be a string");
   invariant(typeof markdown === "string", "markdown must be a string");
+
   if (intent == "create") {
-    await createPost({ title, slug, markdown });
+    await createPost({ title, slug, summary, markdown });
   }
   invariant(params.slug, "params.slug must not be null");
   if (intent == "delete") {
@@ -59,13 +63,13 @@ export const action = async ({ request, params }: ActionArgs) => {
     return redirect("/posts/admin");
   }
   if (intent == "update") {
-    await updatePost(params.slug, { title, slug, markdown });
+    await updatePost(params.slug, { title, slug, summary, markdown });
   }
   return redirect(`/posts/${slug}`);
 };
 
 const inputClassName =
-  "w-full rounded border border-gray-500 px-2 py-1 text-lg";
+  "w-full rounded border border-gray-500 px-2 py-1 text-lg text-black";
 
 export default function NewPost() {
   const data = useLoaderData() as LoaderData;
@@ -98,6 +102,20 @@ export default function NewPost() {
             type="text"
             name="slug"
             defaultValue={data.post?.slug}
+            className={inputClassName}
+          />
+        </label>
+      </p>
+      <p>
+        <label>
+          Post Summary:{" "}
+          {errors?.summary ? (
+            <em className="text-red-600">{errors.summary}</em>
+          ) : null}
+          <input
+            type="text"
+            name="summary"
+            defaultValue={data.post?.summary}
             className={inputClassName}
           />
         </label>
