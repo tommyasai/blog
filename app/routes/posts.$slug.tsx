@@ -18,8 +18,7 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 
 export const meta: MetaFunction = ({ data }) => {
-  const { title, image } = data.post;
-  const summary = "Temp summary";
+  const { title, summary, image } = data.post;
   const postImage = `${siteMetadata.url}${image}`;
 
   return [
