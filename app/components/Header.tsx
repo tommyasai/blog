@@ -23,7 +23,7 @@ export const Header = () => {
       >
         {siteLogo ? (
           <img
-            className="rounded-full sm:max-w-xs md:max-w-sm"
+            className="rounded-full max-w-xs md:max-w-sm"
             alt="Website logo"
             src={siteLogo}
             loading="lazy"
