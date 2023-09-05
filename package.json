@@ -11,7 +11,6 @@
     "pre-commit": "npm run lint && npm run format",
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "generate:css": "tailwindcss -o ./app/styles/tailwind.css",
     "prepare": "husky install"
   },
   "prettier": {},
