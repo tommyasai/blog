@@ -5,4 +5,4 @@ node_modules
 /seeds
 .env
 
-/app/styles/tailwind.css
+/app/tailwind.css

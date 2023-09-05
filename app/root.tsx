@@ -15,7 +15,7 @@ import {
   useLocation,
 } from "@remix-run/react";
 import * as gtag from "~/utils/gtags.client";
-import tailwindStylesheetUrl from "./styles/tailwind.css";
+import tailwindStylesheetUrl from "./tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
 import { useEffect } from "react";
