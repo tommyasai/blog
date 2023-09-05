@@ -18,9 +18,6 @@ export default function Index() {
 
   return (
     <div className="w-full">
-      <div className="md:flex md:justify-between md:items-center">
-        <h1>all posts</h1>
-      </div>
       <PostsList posts={posts} />
     </div>
   );

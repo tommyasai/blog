@@ -23,6 +23,7 @@ import { isDarkMode } from "./utils/darkMode";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { siteMetadata } from "./siteMetadata";
+import { NavBar } from "./components/NavBar";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -95,6 +96,7 @@ export default function App() {
         className={`dark:bg-slate-900 overflow-y-scroll ${proseClasses} ${flexClasses} ${spacingClasses}`}
       >
         <Header />
+        <NavBar />
         <Outlet />
         <Footer />
         <ScrollRestoration />

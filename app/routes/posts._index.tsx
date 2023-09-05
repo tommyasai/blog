@@ -18,9 +18,6 @@ export default function PostsRoute() {
 
   return (
     <main className="w-full">
-      <div className="md:flex md:justify-between md:items-center">
-        <h1>Posts</h1>
-      </div>
       <PostsList posts={posts} />
     </main>
   );
