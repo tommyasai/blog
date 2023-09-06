@@ -2,8 +2,8 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="w-full p-4">
-      <h1 className="text-2xl font-bold mb-4">About Me</h1>
+    <div className="w-full">
+      <h1 className="font-bold mb-4">About Me</h1>
       <section className="mb-6">
         <div>
           <p>
@@ -29,6 +29,17 @@ export default function About() {
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Podcast</h2>
+        <a
+            href="https://open.spotify.com/show/0J8LZwfrGB9BJLihy4Ldb1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/images/podcast.png"
+              alt="London Tech Talk"
+              className="w-80 h-auto"
+            />
+          </a>
         <p>
           I run a weekly podcast,{" "}
           <a
@@ -40,17 +51,7 @@ export default function About() {
           </a>
           , where we discuss the technology and interview leading experts in the
           field.
-          <a
-            href="https://open.spotify.com/show/0J8LZwfrGB9BJLihy4Ldb1"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/podcast.png"
-              alt="London Tech Talk"
-              className="w-80 h-auto"
-            />
-          </a>
+ 
         </p>
       </section>
 
@@ -62,12 +63,13 @@ export default function About() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Database-Intensive Application Design (DDIA)
             <img
               src="/images/ddia.png"
               alt="Designing Data-Intensive Applications book-cover"
               className="w-80 h-auto"
             />
+            Database-Intensive Application Design (DDIA)x
+
           </a>
         </p>
       </section>

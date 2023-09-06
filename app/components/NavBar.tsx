@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 export const NavBar = () => {
   return (
-    <nav className="md:ml-4">
+    <nav>
       <ul className="list-none flex space-x-4">
         <li>
           <Link to="/posts">Posts</Link>

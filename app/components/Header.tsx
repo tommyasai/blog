@@ -13,7 +13,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="flex flex-col sm:flex-row justify-between items-center max-w-full w-full md:py-8 gap-x-6">
+    <header className="flex flex-col sm:flex-row justify-between items-center max-w-full w-full gap-x-6">
       <div className="flex items-center sm:order-2 flex-1 sm:hidden">
         <h1 className="m-0">Tommyasai</h1>
       </div>
@@ -23,7 +23,7 @@ export const Header = () => {
       >
         {siteLogo ? (
           <img
-            className="rounded-full max-w-xs md:max-w-sm"
+            className="rounded-full max-w-xs"
             alt="Website logo"
             src={siteLogo}
             loading="lazy"
