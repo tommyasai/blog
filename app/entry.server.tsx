@@ -12,18 +12,23 @@ import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 import { getEnv } from "./env.server";
+import { otherRootRouteHandlers } from "./utils/otherRouteRouts.server";
 
 global.ENV = getEnv();
 
 const ABORT_DELAY = 5_000;
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
   loadContext: AppLoadContext,
 ) {
+  for (const handler of otherRootRouteHandlers) {
+    const otherRouteResponse = await handler(request, remixContext);
+    if (otherRouteResponse) return otherRouteResponse;
+  }
   return isbot(request.headers.get("user-agent"))
     ? handleBotRequest(
         request,
