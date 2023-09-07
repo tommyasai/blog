@@ -3,7 +3,7 @@ export const siteMetadata = {
   description: "Hi, I am tommyasai",
   domain: "tommyasai.fly.dev",
   url: "https://tommyasai.fly.dev",
-  image: "/images/logo.jpg",
+  image: "https://ibb.co/FYyH24n",
   author: "Yosuke Tommy Asai",
   twitter: "tommyasai",
   github: "tommyasai",

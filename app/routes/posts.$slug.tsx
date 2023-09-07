@@ -2,9 +2,10 @@ import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { getPost } from "~/models/post.server";
+import { getPost, getPostListings } from "~/models/post.server";
 import ReactMarkdown from "react-markdown";
 import { siteMetadata } from "~/siteMetadata";
+import { SEOHandle } from "@balavishnuvj/remix-seo";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.slug, "params.slug is required");
@@ -19,9 +20,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) {
-    return [
-      { title: 'Something went wrong' },
-    ];
+    return [{ title: "Something went wrong" }];
   }
   const { title, summary, image } = data.post;
   const postImage = `${siteMetadata.url}${image}`;
@@ -36,6 +35,15 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     { name: "twitter:description", content: summary },
     { name: "twitter:image", content: postImage },
   ];
+};
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    const posts = await getPostListings();
+    return posts.map((post) => {
+      return { route: `/posts/${post.slug}`, priority: 0.7 };
+    });
+  },
 };
 
 export default function PostSlug() {
