@@ -1,5 +1,5 @@
-import type { ActionArgs, LoaderFunction } from "@remix-run/node";
-import { Response, json, redirect } from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json<LoaderData>({ post });
 };
 
-export const action = async ({ request, params }: ActionArgs) => {
+export const action = async ({ request, params }: ActionFunctionArgs) => {
   await requireAdminUser(request);
   const formData = await request.formData();
 
