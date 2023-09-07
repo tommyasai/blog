@@ -7,10 +7,10 @@ export default function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
   const markup = renderToString(
-    <RemixServer context={remixContext} url={request.url} />
+    <RemixServer context={remixContext} url={request.url} />,
   );
 
   responseHeaders.set("Content-Type", "text/html");
@@ -25,7 +25,7 @@ export default function handleRequest(
 }
 
 export const handleDataRequest: HandleDataRequestFunction = (
-  response: Response
+  response: Response,
 ) => {
   if (process.env.NODE_ENV !== "development") {
     response.headers.set("Cache-Control", "max-age=300, s-maxage=31556952");

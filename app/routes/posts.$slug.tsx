@@ -19,9 +19,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) {
-    return [
-      { title: 'Something went wrong' },
-    ];
+    return [{ title: "Something went wrong" }];
   }
   const { title, summary, image } = data.post;
   const postImage = `${siteMetadata.url}${image}`;
