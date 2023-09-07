@@ -21,12 +21,13 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
+          install-command: npm install --legacy-peer-deps
 
       - name: 🔬 Lint
         run: npm run lint
@@ -41,12 +42,13 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
+          install-command: npm install --legacy-peer-deps
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
