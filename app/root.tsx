@@ -64,7 +64,7 @@ export const meta: MetaFunction = ({ location }) => {
 
 export default function App() {
   const location = useLocation();
-  const data = useLoaderData();
+  const data = useLoaderData<LoaderData>();
   const gaTrackingId = data.ENV.GA_TRACKING_ID;
 
   useEffect(() => {
