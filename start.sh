@@ -7,5 +7,5 @@
 
 set -ex
 npx prisma migrate deploy
-npm install tsconfig-paths
+npm install tsconfig-paths --legacy-peer-deps
 npm run start
