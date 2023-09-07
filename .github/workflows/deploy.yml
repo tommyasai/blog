@@ -27,6 +27,7 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
+          install-command: npm install --legacy-peer-deps
 
       - name: 🔬 Lint
         run: npm run lint
