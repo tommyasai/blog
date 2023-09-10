@@ -3,8 +3,8 @@ import React from "react";
 export default function About() {
   return (
     <div className="w-full">
-      <h1 className="font-bold mb-4">About Me</h1>
-      <section className="mb-6">
+      <h1 className="font-bold mb-4 lg:mx-24">About Me</h1>
+      <section className="mb-6 lg:mx-24">
         <div>
           <p>
             Hi there! I'm Yosuke Tommy Asai, a dedicated Site Reliability
@@ -27,19 +27,19 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-6">
+      <section className="mb-6 lg:mx-24">
         <h2 className="text-xl font-semibold mb-2">Podcast</h2>
         <a
-            href="https://open.spotify.com/show/0J8LZwfrGB9BJLihy4Ldb1"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/podcast.png"
-              alt="London Tech Talk"
-              className="w-80 h-auto"
-            />
-          </a>
+          href="https://open.spotify.com/show/0J8LZwfrGB9BJLihy4Ldb1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/images/podcast.png"
+            alt="London Tech Talk"
+            className="w-80 h-auto"
+          />
+        </a>
         <p>
           I run a weekly podcast,{" "}
           <a
@@ -51,11 +51,10 @@ export default function About() {
           </a>
           , where we discuss the technology and interview leading experts in the
           field.
- 
         </p>
       </section>
 
-      <section className="mb-6">
+      <section className="mb-6 lg:mx-24">
         <h2 className="text-xl font-semibold mb-2">Readings</h2>
         <p>
           <a
@@ -69,7 +68,6 @@ export default function About() {
               className="w-80 h-auto"
             />
             Database-Intensive Application Design (DDIA)x
-
           </a>
         </p>
       </section>

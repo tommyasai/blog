@@ -11,12 +11,20 @@ export async function getPostListings() {
       summary: true,
       createdAt: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return posts.map((post) => formatTimestampsInObject(post, ["createdAt"]));
 }
 
 export async function getPosts() {
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return posts.map((post) =>
     formatTimestampsInObject(post, ["createdAt", "updatedAt"]),
   );
