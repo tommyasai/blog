@@ -5,8 +5,9 @@ import invariant from "tiny-invariant";
 import { getPost, getPostListings } from "~/models/post.server";
 import ReactMarkdown from "react-markdown";
 import { siteMetadata } from "~/siteMetadata";
-import { SEOHandle } from "@balavishnuvj/remix-seo";
-
+import type { SEOHandle } from "@balavishnuvj/remix-seo";
+import twitterLogo from "../assets/x.png";
+import { useEffect, useState } from "react";
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.slug, "params.slug is required");
 
@@ -49,13 +50,44 @@ export const handle: SEOHandle = {
 export default function PostSlug() {
   const { post } = useLoaderData<typeof loader>();
 
+  const [twitterShareURL, setTwitterShareURL] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTwitterShareURL(
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+          post.title,
+        )}&url=${encodeURIComponent(window.location.href)}&via=${
+          siteMetadata.twitter
+        }`,
+      );
+    }
+  }, [post]);
+
   return (
     <main className="mx-auto max-w-full">
-      <h1 className="m-0 border-b-2 text-center text-2xl">{post.title}</h1>
-      <div className="text-right mb-4">
-        Published: {post.createdAt} <br />
-        Updated: {post.updatedAt}
+      <div className="flex justify-between">
+        <a href={twitterShareURL} target="_blank" rel="noopener noreferrer">
+          <img
+            src={twitterLogo}
+            alt="Tweet this post"
+            width="24"
+            height="24"
+            className="dark:invert"
+          />
+        </a>
+        <div className="text-right">
+          Published: {post.createdAt} <br />
+          Updated: {post.updatedAt}
+        </div>
       </div>
+
+      <div className="flex items-center mb-4">
+        <h1 className="flex-grow text-center border-b-2 m-0 text-2xl">
+          {post.title}
+        </h1>
+      </div>
+
       <article className="prose sm:prose-xl md:prose-xl lg:prose-xl dark:prose-invert">
         <ReactMarkdown>{post.markdown}</ReactMarkdown>
       </article>
