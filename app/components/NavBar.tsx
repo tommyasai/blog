@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+import { useOptionalAdminUser } from "~/utils";
 
 export const NavBar = () => {
   return (
@@ -10,6 +11,11 @@ export const NavBar = () => {
         <li>
           <Link to="/about">About</Link>
         </li>
+        {useOptionalAdminUser() ? (
+          <li>
+            <Link to="/posts/admin">Admin</Link>
+          </li>
+        ) : null}
       </ul>
     </nav>
   );

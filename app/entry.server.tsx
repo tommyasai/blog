@@ -2,6 +2,9 @@ import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { renderToString } from "react-dom/server";
 import { otherRootRouteHandlers } from "./utils/otherRouteRoutes.server";
+import { getEnv } from "./env.server";
+
+global.ENV = getEnv();
 
 export default async function handleRequest(
   request: Request,
