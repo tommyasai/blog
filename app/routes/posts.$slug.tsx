@@ -8,6 +8,7 @@ import { siteMetadata } from "~/siteMetadata";
 import type { SEOHandle } from "@balavishnuvj/remix-seo";
 import twitterLogo from "../assets/x.png";
 import { useEffect, useState } from "react";
+
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.slug, "params.slug is required");
 
@@ -32,9 +33,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     { property: "og:title", content: title },
     { property: "og:description", content: summary },
     { property: "og:image", content: postImage },
-    { name: "twitter:title", content: title },
-    { name: "twitter:description", content: summary },
-    { name: "twitter:image", content: postImage },
   ];
 };
 

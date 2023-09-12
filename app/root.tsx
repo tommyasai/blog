@@ -54,11 +54,6 @@ export const meta: MetaFunction = ({ location }) => {
     { property: "og:title", content: siteMetadata.title },
     { property: "og:description", content: siteMetadata.description },
     { property: "og:image", content: siteMetadata.image },
-    { name: "twitter:card", content: "summary" },
-    { name: "twitter:site", content: `@${siteMetadata.twitter}` },
-    { name: "twitter:title", content: siteMetadata.title },
-    { name: "twitter:description", content: siteMetadata.description },
-    { name: "twitter:image", content: siteMetadata.image },
   ];
 };
 
