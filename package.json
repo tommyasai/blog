@@ -10,8 +10,7 @@
     "typecheck": "tsc",
     "pre-commit": "npm run lint && npm run format",
     "format": "prettier --write .",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "prepare": "husky install"
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
   },
   "prettier": {},
   "eslintIgnore": [
@@ -47,7 +46,6 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
-    "husky": "^8.0.3",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
     "prisma": "^5.1.1",
