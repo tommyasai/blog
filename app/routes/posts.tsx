@@ -17,7 +17,7 @@ export function ErrorBoundary() {
   // when true, this is what used to go to `CatchBoundary`
   if (isRouteErrorResponse(error)) {
     return (
-      <article className="prose lg:prose-xl">
+      <article className="prose lg:prose-xl dark:prose-invert">
         <ReactMarkdown>
           {`Ooops! **${params.slug}** does not exist!`}
         </ReactMarkdown>
