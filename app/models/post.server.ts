@@ -32,7 +32,7 @@ export async function getPosts() {
 
 export async function getPost(slug: string) {
   const post = await prisma.post.findUnique({ where: { slug } });
-  return formatTimestampsInObject(post, ["createdAt", "updatedAt"]);
+  return post ? formatTimestampsInObject(post, ["createdAt", "updatedAt"]) : null
 }
 
 export async function createPost(
