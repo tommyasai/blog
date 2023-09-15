@@ -65,6 +65,10 @@ export default function PostSlug() {
   return (
     <main className="mx-auto max-w-full">
       <div className="flex justify-between">
+        <div className="text-left">
+          Published: {post.createdAt} <br />
+          Updated: {post.updatedAt}
+        </div>
         <a href={twitterShareURL} target="_blank" rel="noopener noreferrer">
           <img
             src={twitterLogo}
@@ -74,14 +78,10 @@ export default function PostSlug() {
             className="dark:invert"
           />
         </a>
-        <div className="text-right">
-          Published: {post.createdAt} <br />
-          Updated: {post.updatedAt}
-        </div>
       </div>
 
       <div className="flex items-center mb-4">
-        <h1 className="flex-grow text-center border-b-2 m-0 text-2xl">
+        <h1 className="flex-grow text-start border-b-2 m-0 text-2xl">
           {post.title}
         </h1>
       </div>
