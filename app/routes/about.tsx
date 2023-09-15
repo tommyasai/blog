@@ -12,17 +12,10 @@ export default function About() {
           </p>
 
           <p>
-            Known for my excellent communication skills, I believe that clear
-            dialogue is crucial for successful projects. One of my primary
-            focuses is contributing to profits, ensuring that my technical
-            solutions not only resolve issues but also add value. 💰
-          </p>
-
-          <p>
             My speciality lies in building robust CI/CD pipelines to automate
-            release cycles and speed up deployment frequency. 🚀 I also relish
-            the challenge of modernizing older tech stacks to stay ahead of the
-            curve.
+            release cycles and speed up deployment frequency, especially on
+            <b> Kubernetes</b>. 🚀 I also relish the challenge of modernizing
+            older tech stacks to stay ahead of the curve.
           </p>
         </div>
       </section>
@@ -55,7 +48,31 @@ export default function About() {
       </section>
 
       <section className="mb-6 lg:mx-24">
-        <h2 className="text-xl font-semibold mb-2">Readings</h2>
+        <h2 className="text-xl font-semibold mb-2">Current Interests</h2>
+        <ul>
+          <li>
+            <a
+              href="https://www.finops.org/introduction/what-is-finops/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FinOps
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://cloud.google.com/learn/what-is-cloud-security"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Cloud Security
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-6 lg:mx-24">
+        <h2 className="text-xl font-semibold mb-2">Reading now</h2>
         <p>
           <a
             href="https://dataintensive.net/"
@@ -67,7 +84,6 @@ export default function About() {
               alt="Designing Data-Intensive Applications book-cover"
               className="w-80 h-auto"
             />
-            Database-Intensive Application Design (DDIA)x
           </a>
         </p>
       </section>

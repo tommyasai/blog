@@ -38,8 +38,8 @@ const Icon = ({ href, alt, src }: IconProps) => {
       <img
         alt={alt}
         src={src}
-        width={42}
-        height={42}
+        width={32}
+        height={32}
         loading="lazy"
         className="dark:invert"
       />
