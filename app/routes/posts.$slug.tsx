@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getPost, getPostListings } from "~/models/post.server";
 import ReactMarkdown from "react-markdown";
@@ -8,6 +8,7 @@ import { siteMetadata } from "~/siteMetadata";
 import type { SEOHandle } from "@balavishnuvj/remix-seo";
 import twitterLogo from "../assets/x.png";
 import { useEffect, useState } from "react";
+import { useOptionalAdminUser } from "~/utils";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.slug, "params.slug is required");
@@ -64,6 +65,9 @@ export default function PostSlug() {
 
   return (
     <main className="mx-auto max-w-full">
+      {useOptionalAdminUser() ? (
+        <Link to={`/posts/admin/${post.slug}`}>Edit</Link>
+      ) : null}
       <div className="flex justify-between">
         <div className="text-left">
           Published: {post.createdAt} <br />
