@@ -5,7 +5,7 @@ import invariant from "tiny-invariant";
 import { getPost, getPostListings } from "~/models/post.server";
 import ReactMarkdown from "react-markdown";
 import { siteMetadata } from "~/siteMetadata";
-import type { SEOHandle } from "@balavishnuvj/remix-seo";
+import type { SEOHandle } from "@nasa-gcn/remix-seo";
 import twitterLogo from "../assets/x.png";
 import { useEffect, useState } from "react";
 import { useOptionalAdminUser } from "~/utils";
