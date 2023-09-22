@@ -27,7 +27,7 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
-          install-command: npm install --legacy-peer-deps
+          install-command: npm install
 
       - name: 🔬 Lint
         run: npm run lint
@@ -48,7 +48,7 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
-          install-command: npm install --legacy-peer-deps
+          install-command: npm install
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
