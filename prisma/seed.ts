@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import invariant from "tiny-invariant";
-import { getUserByEmail, getUserById } from "~/models/user.server";
 
 const prisma = new PrismaClient();
 
