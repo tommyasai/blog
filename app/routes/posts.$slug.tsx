@@ -69,10 +69,7 @@ export default function PostSlug() {
         <Link to={`/posts/admin/${post.slug}`}>Edit</Link>
       ) : null}
       <div className="flex justify-between">
-        <div className="text-left">
-          Published: {post.createdAt} <br />
-          Updated: {post.updatedAt}
-        </div>
+        <div className="text-left">{post.createdAt}</div>
         <a href={twitterShareURL} target="_blank" rel="noopener noreferrer">
           <img
             src={twitterLogo}
