@@ -48,44 +48,27 @@ export default function About() {
       </section>
 
       <section className="mb-6 lg:mx-24">
-        <h2 className="text-xl font-semibold mb-2">Current Interests</h2>
+        <h2 className="text-xl font-semibold mb-2">Readings</h2>
         <ul>
           <li>
             <a
-              href="https://www.finops.org/introduction/what-is-finops/"
+              href="https://www.manning.com/books/software-mistakes-and-tradeoffs"
               target="_blank"
               rel="noopener noreferrer"
             >
-              FinOps
+              Software Mistakes and Tradeoffs
             </a>
           </li>
           <li>
             <a
-              href="https://cloud.google.com/learn/what-is-cloud-security"
+              href="https://dataintensive.net/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Cloud Security
+              Designing Data-Intensive Applications
             </a>
           </li>
         </ul>
-      </section>
-
-      <section className="mb-6 lg:mx-24">
-        <h2 className="text-xl font-semibold mb-2">Reading now</h2>
-        <p>
-          <a
-            href="https://dataintensive.net/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/ddia.png"
-              alt="Designing Data-Intensive Applications book-cover"
-              className="w-80 h-auto"
-            />
-          </a>
-        </p>
       </section>
     </div>
   );
