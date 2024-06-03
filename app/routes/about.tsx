@@ -1,5 +1,7 @@
 import React from "react";
 
+const PODCAST_URL = "https://london-tech-talk.com/";
+
 export default function About() {
   return (
     <div className="w-full">
@@ -22,11 +24,7 @@ export default function About() {
 
       <section className="mb-6 lg:mx-24">
         <h2 className="text-xl font-semibold mb-2">Podcast</h2>
-        <a
-          href="https://open.spotify.com/show/0J8LZwfrGB9BJLihy4Ldb1"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={PODCAST_URL} target="_blank" rel="noopener noreferrer">
           <img
             src="/images/podcast.png"
             alt="London Tech Talk"
@@ -35,11 +33,7 @@ export default function About() {
         </a>
         <p>
           I run a weekly podcast,{" "}
-          <a
-            href="https://open.spotify.com/show/0J8LZwfrGB9BJLihy4Ldb1"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={PODCAST_URL} target="_blank" rel="noopener noreferrer">
             <b>London Tech Talk</b>
           </a>
           , where we discuss the technology and interview leading experts in the
