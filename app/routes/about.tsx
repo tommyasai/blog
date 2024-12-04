@@ -14,8 +14,7 @@ export default function About() {
           <p>
             My speciality lies in building robust CI/CD pipelines to automate
             release cycles and speed up deployment frequency, especially on
-            <b> Kubernetes</b>. 🚀 I also relish the challenge of modernizing
-            older tech stacks to stay ahead of the curve.
+            <b> Kubernetes</b> and AWS. 🚀
           </p>
         </div>
       </section>
